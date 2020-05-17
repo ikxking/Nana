@@ -1,0 +1,40 @@
+import datetime
+import csv
+
+print ("Nana, do you want to start work? Yes/No: ")
+DatePrompt: str = input()
+if DatePrompt == 'yes' :
+        StartTime = datetime.datetime.now()
+        print("Your starting time is:")
+        print (StartTime)
+        print("Are you done for the day? Yes/No: ")
+Answer: str = input()
+
+if Answer == 'yes':
+                CloseTime = datetime.datetime.now()
+                print("You stopped work at: ")
+                print(CloseTime)
+                diff_time = CloseTime - StartTime
+                hour = diff_time.total_seconds() / 3600.0
+                print('You have worked for :', hour,'Hours')
+                AmountPaid = hour * 5
+                print('You will be paid approximately:', "%.2f"%AmountPaid, 'USD')
+                st = StartTime.strftime('%m/%d/%Y')
+                ct = CloseTime.strftime('%m/%d/%Y')
+
+                ap = str(AmountPaid)
+
+else: print("Bye Bye Nana")
+
+
+
+myData = [[StartTime, CloseTime, hour, AmountPaid]]
+
+myFile = open('NanaFile.csv', 'a')
+with myFile:
+    writer = csv.writer(myFile)
+    writer.writerows(myData)
+
+
+
+
